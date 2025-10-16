@@ -1,0 +1,279 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #ffffff;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FF914D;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #E67E22;
+}
+
+/* Custom animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.6s ease-out;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Custom button styles */
+.btn-primary {
+  @apply bg-trendvibe-orange hover:bg-trendvibe-orange-dark text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg;
+}
+
+.btn-secondary {
+  @apply bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-3 px-6 rounded-lg transition-all duration-300;
+}
+
+.btn-outline {
+  @apply border-2 border-trendvibe-orange text-trendvibe-orange hover:bg-trendvibe-orange hover:text-white font-medium py-3 px-6 rounded-lg transition-all duration-300;
+}
+
+/* Card hover effects */
+.card-hover {
+  @apply transition-all duration-300 transform hover:scale-105 hover:shadow-xl;
+}
+
+/* Product card styles */
+.product-card {
+  @apply bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2;
+}
+
+.product-card:hover .product-image {
+  @apply scale-110;
+}
+
+.product-image {
+  @apply transition-transform duration-300;
+}
+
+/* Loading spinner */
+.spinner {
+  @apply animate-spin rounded-full h-8 w-8 border-b-2 border-trendvibe-orange;
+}
+
+/* Form styles */
+.form-input {
+  @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-trendvibe-orange focus:border-transparent transition-all duration-300;
+}
+
+.form-label {
+  @apply block text-sm font-medium text-gray-700 mb-2;
+}
+
+/* WhatsApp button */
+.whatsapp-btn {
+  @apply fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 z-50;
+}
+
+/* Discount badge */
+.discount-badge {
+  @apply absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full;
+}
+
+/* New arrival badge */
+.new-badge {
+  @apply absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full;
+}
+
+/* Search bar */
+.search-bar {
+  @apply w-full max-w-md mx-auto relative;
+}
+
+.search-input {
+  @apply w-full px-4 py-3 pr-12 border border-gray-300 rounded-full focus:ring-2 focus:ring-trendvibe-orange focus:border-transparent transition-all duration-300;
+}
+
+.search-btn {
+  @apply absolute right-2 top-1/2 transform -translate-y-1/2 bg-trendvibe-orange text-white p-2 rounded-full hover:bg-trendvibe-orange-dark transition-colors duration-300;
+}
+
+/* Mobile menu */
+.mobile-menu {
+  @apply fixed inset-0 bg-white z-50 transform transition-transform duration-300 ease-in-out;
+}
+
+.mobile-menu.hidden {
+  @apply translate-x-full;
+}
+
+/* Cart badge */
+.cart-badge {
+  @apply absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center;
+}
+
+/* Toast notifications */
+.toast-success {
+  @apply bg-green-500 text-white;
+}
+
+.toast-error {
+  @apply bg-red-500 text-white;
+}
+
+.toast-info {
+  @apply bg-blue-500 text-white;
+}
+
+/* Responsive grid */
+.grid-responsive {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6;
+}
+
+/* Hero section */
+.hero-gradient {
+  background: linear-gradient(135deg, #FF914D 0%, #E67E22 100%);
+}
+
+/* Category filter */
+.category-filter {
+  @apply flex flex-wrap gap-2 mb-6;
+}
+
+.category-btn {
+  @apply px-4 py-2 rounded-full border border-gray-300 hover:border-trendvibe-orange hover:bg-trendvibe-orange hover:text-white transition-all duration-300;
+}
+
+.category-btn.active {
+  @apply bg-trendvibe-orange text-white border-trendvibe-orange;
+}
+
+/* Price range slider */
+.price-slider {
+  @apply w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer;
+}
+
+.price-slider::-webkit-slider-thumb {
+  @apply appearance-none w-5 h-5 bg-trendvibe-orange rounded-full cursor-pointer;
+}
+
+.price-slider::-moz-range-thumb {
+  @apply w-5 h-5 bg-trendvibe-orange rounded-full cursor-pointer border-0;
+}
+
+/* Admin panel styles */
+.admin-sidebar {
+  @apply fixed left-0 top-0 h-full w-64 bg-gray-800 text-white transform transition-transform duration-300 ease-in-out;
+}
+
+.admin-sidebar.hidden {
+  @apply -translate-x-full;
+}
+
+.admin-main {
+  @apply ml-0 transition-all duration-300;
+}
+
+.admin-main.sidebar-open {
+  @apply ml-64;
+}
+
+/* Chart container */
+.chart-container {
+  @apply bg-white p-6 rounded-lg shadow-md;
+}
+
+/* Table styles */
+.admin-table {
+  @apply w-full bg-white rounded-lg shadow-md overflow-hidden;
+}
+
+.admin-table th {
+  @apply bg-gray-50 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider;
+}
+
+.admin-table td {
+  @apply px-6 py-4 whitespace-nowrap text-sm text-gray-900;
+}
+
+.admin-table tr:nth-child(even) {
+  @apply bg-gray-50;
+}
+
+/* Status badges */
+.status-pending {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800;
+}
+
+.status-confirmed {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800;
+}
+
+.status-shipped {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800;
+}
+
+.status-delivered {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800;
+}
+
+.status-cancelled {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800;
+}
