@@ -18,6 +18,7 @@ app.use('/api/products', require('./routes/products'));
 app.use('/api/orders', require('./routes/orders'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/messages', require('./routes/messages'));
+app.use('/api/firebase-auth', require('./routes/firebaseAuth'));
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

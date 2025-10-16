@@ -9,15 +9,22 @@ import {
   FiSearch, 
   FiShoppingCart, 
   FiUser,
-  FiHeart
+  FiHeart,
+  FiLogOut,
+  FiChevronDown
 } from 'react-icons/fi'
 import { useCart } from '@/context/CartContext'
+import { useAuth } from '@/context/AuthContext'
+import { CATEGORY_DATA, getCategoryOptions } from '@/lib/categories'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
+  const [showUserMenu, setShowUserMenu] = useState(false)
+  const [showCategoryMenu, setShowCategoryMenu] = useState(false)
   const { cartItems } = useCart()
+  const { user, logout } = useAuth()
   const router = useRouter()
 
   const cartItemsCount = cartItems.reduce((total, item) => total + item.quantity, 0)
@@ -38,12 +45,20 @@ export default function Navbar() {
     }
   }
 
+  const handleLogout = async () => {
+    await logout()
+    setShowUserMenu(false)
+    router.push('/')
+  }
+
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'Shop', href: '/shop' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' },
   ]
+
+  const categoryOptions = getCategoryOptions()
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -70,6 +85,51 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
+            
+            {/* Categories Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setShowCategoryMenu(!showCategoryMenu)}
+                className="flex items-center space-x-1 text-gray-700 hover:text-trendvibe-orange transition-colors duration-300 font-medium"
+              >
+                <span>Categories</span>
+                <FiChevronDown className={`w-4 h-4 transition-transform duration-200 ${showCategoryMenu ? 'rotate-180' : ''}`} />
+              </button>
+              
+              {showCategoryMenu && (
+                <>
+                  <div 
+                    className="fixed inset-0 z-10" 
+                    onClick={() => setShowCategoryMenu(false)}
+                  />
+                  <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg z-20 py-2">
+                    <Link
+                      href="/shop"
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors duration-200"
+                      onClick={() => setShowCategoryMenu(false)}
+                    >
+                      <div className="flex items-center space-x-2">
+                        <span>🛍️</span>
+                        <span>All Categories</span>
+                      </div>
+                    </Link>
+                    {categoryOptions.map((category) => (
+                      <Link
+                        key={category.value}
+                        href={`/shop?category=${category.value}`}
+                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors duration-200"
+                        onClick={() => setShowCategoryMenu(false)}
+                      >
+                        <div className="flex items-center space-x-2">
+                          <span>{category.icon}</span>
+                          <span>{category.label}</span>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
           </div>
 
           {/* Search Bar */}
@@ -123,12 +183,59 @@ export default function Navbar() {
             </Link>
 
             {/* User Account */}
-            <Link
-              href="/account"
-              className="hidden sm:block p-2 text-gray-700 hover:text-trendvibe-orange transition-colors duration-300"
-            >
-              <FiUser className="w-5 h-5" />
-            </Link>
+            {user ? (
+              <div className="hidden sm:block relative">
+                <button
+                  onClick={() => setShowUserMenu(!showUserMenu)}
+                  className="flex items-center space-x-2 p-2 text-gray-700 hover:text-trendvibe-orange transition-colors duration-300"
+                >
+                  <FiUser className="w-5 h-5" />
+                  <span className="text-sm font-medium">{user.displayName || user.email}</span>
+                </button>
+                
+                {showUserMenu && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                    <Link
+                      href="/account"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      onClick={() => setShowUserMenu(false)}
+                    >
+                      My Account
+                    </Link>
+                    <Link
+                      href="/orders"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      onClick={() => setShowUserMenu(false)}
+                    >
+                      My Orders
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      <FiLogOut className="inline w-4 h-4 mr-2" />
+                      Sign Out
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="hidden sm:flex items-center space-x-2">
+                <Link
+                  href="/login"
+                  className="text-gray-700 hover:text-trendvibe-orange transition-colors duration-300 font-medium"
+                >
+                  Sign In
+                </Link>
+                <span className="text-gray-300">|</span>
+                <Link
+                  href="/register"
+                  className="text-gray-700 hover:text-trendvibe-orange transition-colors duration-300 font-medium"
+                >
+                  Sign Up
+                </Link>
+              </div>
+            )}
 
             {/* Mobile Menu Button */}
             <button
@@ -171,6 +278,34 @@ export default function Navbar() {
                   {link.name}
                 </Link>
               ))}
+              
+              {/* Mobile Categories */}
+              <div className="pt-2 border-t border-gray-200">
+                <div className="text-sm font-medium text-gray-500 mb-2">Categories</div>
+                <Link
+                  href="/shop"
+                  className="block py-2 text-gray-700 hover:text-trendvibe-orange transition-colors duration-300"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <div className="flex items-center space-x-2">
+                    <span>🛍️</span>
+                    <span>All Categories</span>
+                  </div>
+                </Link>
+                {categoryOptions.map((category) => (
+                  <Link
+                    key={category.value}
+                    href={`/shop?category=${category.value}`}
+                    className="block py-2 text-gray-700 hover:text-trendvibe-orange transition-colors duration-300"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <div className="flex items-center space-x-2">
+                      <span>{category.icon}</span>
+                      <span>{category.label}</span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
             </div>
 
             {/* Mobile Account Links */}
@@ -183,14 +318,56 @@ export default function Navbar() {
                 <FiHeart className="w-5 h-5 mr-3" />
                 Wishlist
               </Link>
-              <Link
-                href="/account"
-                className="flex items-center py-2 text-gray-700 hover:text-trendvibe-orange transition-colors duration-300"
-                onClick={() => setIsOpen(false)}
-              >
-                <FiUser className="w-5 h-5 mr-3" />
-                My Account
-              </Link>
+              
+              {user ? (
+                <>
+                  <Link
+                    href="/account"
+                    className="flex items-center py-2 text-gray-700 hover:text-trendvibe-orange transition-colors duration-300"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <FiUser className="w-5 h-5 mr-3" />
+                    My Account
+                  </Link>
+                  <Link
+                    href="/orders"
+                    className="flex items-center py-2 text-gray-700 hover:text-trendvibe-orange transition-colors duration-300"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <FiUser className="w-5 h-5 mr-3" />
+                    My Orders
+                  </Link>
+                  <button
+                    onClick={() => {
+                      handleLogout()
+                      setIsOpen(false)
+                    }}
+                    className="flex items-center py-2 text-gray-700 hover:text-trendvibe-orange transition-colors duration-300"
+                  >
+                    <FiLogOut className="w-5 h-5 mr-3" />
+                    Sign Out
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    href="/login"
+                    className="flex items-center py-2 text-gray-700 hover:text-trendvibe-orange transition-colors duration-300"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <FiUser className="w-5 h-5 mr-3" />
+                    Sign In
+                  </Link>
+                  <Link
+                    href="/register"
+                    className="flex items-center py-2 text-gray-700 hover:text-trendvibe-orange transition-colors duration-300"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <FiUser className="w-5 h-5 mr-3" />
+                    Sign Up
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>
