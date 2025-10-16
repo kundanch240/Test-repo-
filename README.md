@@ -1,178 +1,57 @@
-# 🛍️ TrendVibe Store
+# TrendVibe Store - E-commerce Platform
 
-<div align="center">
+A modern, full-stack e-commerce platform built with Next.js, Express.js, MongoDB, and Firebase Authentication. Features a comprehensive product catalog with categories, advanced filtering, user authentication, and a responsive design.
 
-![TrendVibe Store](https://img.shields.io/badge/TrendVibe-Store-ff6b6b?style=for-the-badge&logo=shopping-cart&logoColor=white)
-![Version](https://img.shields.io/badge/version-1.0.0-blue?style=for-the-badge)
-![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
-![Next.js](https://img.shields.io/badge/Next.js-14.0.4-black?style=for-the-badge&logo=next.js)
-![Node.js](https://img.shields.io/badge/Node.js-Express-green?style=for-the-badge&logo=node.js)
+## 🚀 Features
 
-**A modern, full-stack e-commerce platform for trendy gadgets and lifestyle products**
+### Authentication & User Management
+- ✅ Firebase email/password authentication
+- ✅ User registration and login forms with validation
+- ✅ Protected routes and user profile management
+- ✅ Server-side token verification with Firebase Admin SDK
+- ✅ Responsive authentication UI
 
-[🚀 Live Demo](#) • [📖 Documentation](#) • [🐛 Report Bug](#) • [✨ Request Feature](#)
+### Product Catalog & Categories
+- ✅ 5 Product Categories: Gadgets, Fitness, Beauty, Home Decor, Auto Accessories
+- ✅ Advanced filtering (category, search, price range, sort options)
+- ✅ Featured and trending products
+- ✅ Grid and list view modes
+- ✅ Product ratings and reviews system
 
-</div>
+### Shopping Experience
+- ✅ Shopping cart functionality
+- ✅ Product search and filtering
+- ✅ Responsive design for all devices
+- ✅ Modern UI with Tailwind CSS
+- ✅ Toast notifications for user feedback
 
----
+### Backend Features
+- ✅ RESTful API with Express.js
+- ✅ MongoDB database with Mongoose
+- ✅ JWT and Firebase authentication
+- ✅ Product management endpoints
+- ✅ User profile management
+- ✅ Sample data seeding
 
-## ✨ Features
-
-### 🎨 Frontend Features
-- **Modern UI/UX** - Built with Next.js 14 and Tailwind CSS
-- **Responsive Design** - Mobile-first approach with beautiful animations
-- **Interactive Shopping Cart** - Real-time cart management with context API
-- **Product Gallery** - High-quality image galleries with zoom functionality
-- **Search & Filter** - Advanced product search and filtering capabilities
-- **User Authentication** - Secure login and registration system
-- **Order Tracking** - Real-time order status updates
-- **WhatsApp Integration** - Direct customer support via WhatsApp
-
-### 🔧 Backend Features
-- **RESTful API** - Clean and well-documented API endpoints
-- **Database Management** - MongoDB with Mongoose ODM
-- **Authentication & Authorization** - JWT-based secure authentication
-- **Payment Integration** - Razorpay payment gateway integration
-- **File Upload** - Multer for handling product images
-- **Email Notifications** - Automated order confirmations and updates
-- **Data Validation** - Express-validator for input validation
-- **Error Handling** - Comprehensive error handling middleware
-
-### 🛡️ Security & Performance
-- **CORS Protection** - Cross-origin resource sharing configuration
-- **Password Hashing** - bcryptjs for secure password storage
-- **Input Validation** - Server-side validation for all inputs
-- **Error Logging** - Comprehensive error tracking and logging
-- **Rate Limiting** - API rate limiting for security
-
----
-
-## 🚀 Tech Stack
+## 🛠️ Tech Stack
 
 ### Frontend
-- **Framework**: Next.js 14
-- **Styling**: Tailwind CSS
-- **Icons**: React Icons
-- **Charts**: Chart.js with React Chart.js 2
-- **Animations**: Framer Motion
-- **Notifications**: React Hot Toast
-- **Image Gallery**: React Image Gallery
+- **Next.js 14** - React framework
+- **React 18** - UI library
+- **Tailwind CSS** - Styling
+- **Firebase Auth** - Authentication
+- **React Icons** - Icon library
+- **React Hot Toast** - Notifications
+- **Framer Motion** - Animations
 
 ### Backend
-- **Runtime**: Node.js
-- **Framework**: Express.js
-- **Database**: MongoDB
-- **ODM**: Mongoose
-- **Authentication**: JWT (jsonwebtoken)
-- **File Upload**: Multer
-- **Email**: Nodemailer
-- **Payment**: Razorpay
-- **Validation**: Express Validator
-
-### Development Tools
-- **Package Manager**: npm
-- **Process Manager**: Concurrently
-- **Development Server**: Nodemon
-- **Linting**: ESLint
-- **TypeScript**: Full TypeScript support
-
----
-
-## 📦 Installation
-
-### Prerequisites
-- Node.js (v16 or higher)
-- npm (v8 or higher)
-- MongoDB (local or cloud instance)
-
-### Quick Start
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/trendvibe-store.git
-   cd trendvibe-store
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm run install-all
-   ```
-
-3. **Environment Setup**
-   ```bash
-   # Create .env file in server directory
-   cd server
-   cp .env.example .env
-   ```
-   
-   Configure your environment variables:
-   ```env
-   MONGODB_URI=mongodb://localhost:27017/trendvibe-store
-   JWT_SECRET=your-super-secret-jwt-key
-   RAZORPAY_KEY_ID=your-razorpay-key
-   RAZORPAY_KEY_SECRET=your-razorpay-secret
-   EMAIL_USER=your-email@gmail.com
-   EMAIL_PASS=your-app-password
-   PORT=5000
-   ```
-
-4. **Start the development servers**
-   ```bash
-   npm run dev
-   ```
-
-   This will start both frontend (http://localhost:3000) and backend (http://localhost:5000) servers.
-
----
-
-## 🎯 Usage
-
-### Development Mode
-```bash
-# Start both frontend and backend
-npm run dev
-
-# Start only frontend
-npm run client
-
-# Start only backend
-npm run server
-```
-
-### Production Mode
-```bash
-# Build the frontend
-npm run build
-
-# Start production server
-npm start
-```
-
-### API Endpoints
-
-#### Products
-- `GET /api/products` - Get all products
-- `GET /api/products/:id` - Get single product
-- `POST /api/products` - Create new product (Admin)
-- `PUT /api/products/:id` - Update product (Admin)
-- `DELETE /api/products/:id` - Delete product (Admin)
-
-#### Orders
-- `GET /api/orders` - Get user orders
-- `POST /api/orders` - Create new order
-- `PUT /api/orders/:id` - Update order status (Admin)
-
-#### Users
-- `POST /api/users/register` - User registration
-- `POST /api/users/login` - User login
-- `GET /api/users/profile` - Get user profile
-- `PUT /api/users/profile` - Update user profile
-
-#### Messages
-- `GET /api/messages` - Get all messages (Admin)
-- `POST /api/messages` - Send new message
-
----
+- **Node.js** - Runtime environment
+- **Express.js** - Web framework
+- **MongoDB** - Database
+- **Mongoose** - ODM
+- **Firebase Admin SDK** - Server-side auth
+- **JWT** - Token authentication
+- **Bcryptjs** - Password hashing
 
 ## 📁 Project Structure
 
@@ -180,99 +59,221 @@ npm start
 trendvibe-store/
 ├── client/                 # Next.js frontend
 │   ├── app/               # App router pages
+│   │   ├── account/       # User profile page
+│   │   ├── login/         # Login page
+│   │   ├── register/      # Registration page
+│   │   ├── shop/          # Product catalog
+│   │   └── page.js        # Home page
 │   ├── components/        # React components
-│   │   ├── Navbar.js
-│   │   ├── Footer.js
-│   │   └── WhatsAppButton.js
-│   ├── context/           # React context providers
+│   │   ├── auth/          # Authentication components
+│   │   └── CategoryFilter.js
+│   ├── context/           # React contexts
+│   │   ├── AuthContext.js
 │   │   └── CartContext.js
+│   ├── lib/               # Utility libraries
+│   │   ├── firebase.js
+│   │   ├── api.js
+│   │   └── categories.js
 │   └── package.json
 ├── server/                # Express.js backend
+│   ├── models/            # Database models
+│   ├── routes/            # API routes
 │   ├── middleware/        # Custom middleware
-│   │   └── auth.js
-│   ├── models/           # MongoDB models
-│   │   ├── User.js
-│   │   ├── Product.js
-│   │   ├── Order.js
-│   │   └── Message.js
-│   ├── routes/           # API routes
-│   │   ├── users.js
-│   │   ├── products.js
-│   │   ├── orders.js
-│   │   └── messages.js
-│   └── index.js          # Server entry point
-├── package.json          # Root package.json
+│   ├── lib/               # Server utilities
+│   └── package.json
+├── FIREBASE_SETUP.md      # Firebase setup guide
+├── CATEGORIES_SETUP.md    # Category system guide
 └── README.md
 ```
 
----
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js (v16 or higher)
+- MongoDB (local or Atlas)
+- Firebase project
+- Git
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/kundanch240/Test-repo-.git
+   cd Test-repo-
+   ```
+
+2. **Install dependencies**
+   ```bash
+   # Install client dependencies
+   cd client
+   npm install
+   
+   # Install server dependencies
+   cd ../server
+   npm install
+   ```
+
+3. **Set up environment variables**
+   
+   **Client (.env.local)**
+   ```env
+   NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
+   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+   NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
+   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+   NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
+   NEXT_PUBLIC_API_URL=http://localhost:5000/api
+   ```
+   
+   **Server (.env)**
+   ```env
+   MONGODB_URI=mongodb://localhost:27017/trendvibe-store
+   JWT_SECRET=your_jwt_secret
+   FIREBASE_PROJECT_ID=your_project_id
+   FIREBASE_PRIVATE_KEY_ID=your_private_key_id
+   FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nyour_private_key\n-----END PRIVATE KEY-----\n"
+   FIREBASE_CLIENT_EMAIL=your_client_email
+   FIREBASE_CLIENT_ID=your_client_id
+   PORT=5000
+   ```
+
+4. **Set up Firebase**
+   - Follow the detailed guide in `FIREBASE_SETUP.md`
+   - Enable Email/Password authentication
+   - Get your Firebase configuration
+
+5. **Start the application**
+   ```bash
+   # Start the server (Terminal 1)
+   cd server
+   npm run dev
+   
+   # Start the client (Terminal 2)
+   cd client
+   npm run dev
+   ```
+
+6. **Add sample data**
+   ```bash
+   # From the root directory
+   node add-sample-data.js
+   ```
+
+7. **Visit the application**
+   - Frontend: http://localhost:3000
+   - Backend API: http://localhost:5000/api
+
+## 📚 Documentation
+
+- [Firebase Setup Guide](FIREBASE_SETUP.md) - Complete Firebase configuration
+- [Category System Guide](CATEGORIES_SETUP.md) - Category management and filtering
+
+## 🎯 API Endpoints
+
+### Authentication
+- `POST /api/users/register` - Register new user
+- `POST /api/users/login` - User login
+- `GET /api/users/profile` - Get user profile
+- `PUT /api/users/profile` - Update user profile
+
+### Firebase Auth
+- `GET /api/firebase-auth/profile` - Get Firebase user profile
+- `PUT /api/firebase-auth/profile` - Update Firebase user profile
+- `POST /api/firebase-auth/verify-token` - Verify Firebase token
+
+### Products
+- `GET /api/products` - Get all products (with filtering)
+- `GET /api/products/:id` - Get single product
+- `POST /api/products` - Create product (Admin)
+- `PUT /api/products/:id` - Update product (Admin)
+- `DELETE /api/products/:id` - Delete product (Admin)
+- `POST /api/products/seed` - Add sample products
+- `POST /api/products/:id/reviews` - Add product review
+
+### Query Parameters for Products
+- `category` - Filter by category (gadgets, fitness, beauty, home-decor, auto-accessories)
+- `search` - Search in name, description, and tags
+- `minPrice` / `maxPrice` - Price range filtering
+- `sort` - Sort by (newest, popular, price-low, price-high)
+- `featured` - Filter featured products
+- `trending` - Filter trending products
+
+## 🎨 Categories
+
+The platform includes 5 main product categories:
+
+1. **Gadgets** 📱 - Latest tech gadgets and innovative devices
+2. **Fitness** 💪 - Fitness equipment and wellness products
+3. **Beauty** 💄 - Beauty and personal care products
+4. **Home Decor** 🏠 - Home decoration and lifestyle items
+5. **Auto Accessories** 🚗 - Car accessories and automotive products
+
+## 🔧 Development
+
+### Available Scripts
+
+**Client**
+```bash
+npm run dev      # Start development server
+npm run build    # Build for production
+npm run start    # Start production server
+npm run lint     # Run ESLint
+```
+
+**Server**
+```bash
+npm run dev      # Start with nodemon
+npm start        # Start production server
+```
+
+### Adding New Features
+
+1. **New Categories**: Update the category enum in `server/models/Product.js` and add category data in `client/lib/categories.js`
+2. **New API Endpoints**: Add routes in `server/routes/`
+3. **New Components**: Add to `client/components/`
+4. **New Pages**: Add to `client/app/`
+
+## 🚀 Deployment
+
+### Frontend (Vercel)
+1. Connect your GitHub repository to Vercel
+2. Set environment variables in Vercel dashboard
+3. Deploy automatically on push to main branch
+
+### Backend (Railway/Heroku)
+1. Connect your GitHub repository
+2. Set environment variables
+3. Deploy automatically
+
+### Database (MongoDB Atlas)
+1. Create a MongoDB Atlas cluster
+2. Update `MONGODB_URI` in server environment variables
+3. Configure network access and database user
 
 ## 🤝 Contributing
 
-We welcome contributions! Please follow these steps:
-
-1. **Fork the repository**
-2. **Create a feature branch**
-   ```bash
-   git checkout -b feature/amazing-feature
-   ```
-3. **Commit your changes**
-   ```bash
-   git commit -m 'Add some amazing feature'
-   ```
-4. **Push to the branch**
-   ```bash
-   git push origin feature/amazing-feature
-   ```
-5. **Open a Pull Request**
-
-### Development Guidelines
-- Follow the existing code style
-- Write meaningful commit messages
-- Add tests for new features
-- Update documentation as needed
-- Ensure all tests pass before submitting
-
----
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
----
+## 🙏 Acknowledgments
 
-## 👥 Team
-
-**TrendVibe Store Team**
-- **Frontend Development**: Next.js, React, Tailwind CSS
-- **Backend Development**: Node.js, Express, MongoDB
-- **UI/UX Design**: Modern, responsive design
-- **DevOps**: Automated deployment and monitoring
-
----
+- Firebase for authentication services
+- Next.js team for the amazing framework
+- Tailwind CSS for the utility-first CSS framework
+- React Icons for the beautiful icon set
 
 ## 📞 Support
 
-- **Email**: support@trendvibestore.com
-- **WhatsApp**: +1 (555) 123-4567
-- **GitHub Issues**: [Report a bug or request a feature](https://github.com/yourusername/trendvibe-store/issues)
+If you have any questions or need help, please open an issue on GitHub or contact the development team.
 
 ---
 
-## 🙏 Acknowledgments
-
-- [Next.js](https://nextjs.org/) - The React framework for production
-- [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework
-- [Express.js](https://expressjs.com/) - Fast, unopinionated web framework
-- [MongoDB](https://www.mongodb.com/) - The database for modern applications
-- [Razorpay](https://razorpay.com/) - Payment gateway integration
-
----
-
-<div align="center">
-
-**⭐ Star this repository if you found it helpful!**
-
-Made with ❤️ by the TrendVibe Store Team
-
-</div>
+**Happy Shopping! 🛍️**
