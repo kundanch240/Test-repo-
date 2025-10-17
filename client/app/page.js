@@ -4,34 +4,30 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { FiArrowRight, FiStar, FiShoppingCart, FiTrendingUp, FiAward } from 'react-icons/fi'
 import { CATEGORY_DATA, getCategoryOptions } from '@/lib/categories'
-import api from '@/lib/api'
+import { useProducts } from '@/context/ProductContext'
 
 export default function HomePage() {
+  const { getFeaturedProducts, getTrendingProducts, loading } = useProducts()
   const [featuredProducts, setFeaturedProducts] = useState([])
   const [trendingProducts, setTrendingProducts] = useState([])
-  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetchProducts()
-  }, [])
-
-  const fetchProducts = async () => {
-    try {
-      setLoading(true)
-      
-      // Fetch featured products
-      const featuredResponse = await api.get('/products?featured=true&sort=popular')
-      setFeaturedProducts(featuredResponse.slice(0, 4))
-      
-      // Fetch trending products
-      const trendingResponse = await api.get('/products?trending=true&sort=popular')
-      setTrendingProducts(trendingResponse.slice(0, 4))
-    } catch (error) {
-      console.error('Error fetching products:', error)
-    } finally {
-      setLoading(false)
+    const fetchProducts = async () => {
+      try {
+        // Fetch featured products
+        const featured = await getFeaturedProducts()
+        setFeaturedProducts(featured.slice(0, 4))
+        
+        // Fetch trending products
+        const trending = await getTrendingProducts()
+        setTrendingProducts(trending.slice(0, 4))
+      } catch (error) {
+        console.error('Error fetching products:', error)
+      }
     }
-  }
+
+    fetchProducts()
+  }, [getFeaturedProducts, getTrendingProducts])
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('en-US', {

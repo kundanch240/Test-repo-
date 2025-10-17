@@ -6,12 +6,10 @@ import Link from 'next/link'
 import { FiFilter, FiX, FiSearch, FiGrid, FiList, FiStar, FiShoppingCart } from 'react-icons/fi'
 import CategoryFilter, { MobileCategoryFilter } from '@/components/CategoryFilter'
 import { CATEGORY_DATA, getCategoryInfo } from '@/lib/categories'
-import api from '@/lib/api'
+import { useProducts } from '@/context/ProductContext'
 
 export default function ShopPage() {
-  const [products, setProducts] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const { products, loading, error, fetchProducts } = useProducts()
   const [filters, setFilters] = useState({
     category: null,
     search: '',
@@ -40,33 +38,26 @@ export default function ShopPage() {
 
   // Fetch products when filters change
   useEffect(() => {
-    fetchProducts()
-  }, [filters])
-
-  const fetchProducts = async () => {
-    try {
-      setLoading(true)
-      setError(null)
-      
-      const queryParams = new URLSearchParams()
-      
-      if (filters.category) queryParams.append('category', filters.category)
-      if (filters.search) queryParams.append('search', filters.search)
-      if (filters.minPrice) queryParams.append('minPrice', filters.minPrice)
-      if (filters.maxPrice) queryParams.append('maxPrice', filters.maxPrice)
-      if (filters.sort) queryParams.append('sort', filters.sort)
-      if (filters.featured) queryParams.append('featured', 'true')
-      if (filters.trending) queryParams.append('trending', 'true')
-      
-      const response = await api.get(`/products?${queryParams.toString()}`)
-      setProducts(response)
-    } catch (err) {
-      setError('Failed to fetch products. Please try again.')
-      console.error('Error fetching products:', err)
-    } finally {
-      setLoading(false)
+    const fetchProductsWithFilters = async () => {
+      try {
+        const params = {}
+        
+        if (filters.category) params.category = filters.category
+        if (filters.search) params.search = filters.search
+        if (filters.minPrice) params.minPrice = filters.minPrice
+        if (filters.maxPrice) params.maxPrice = filters.maxPrice
+        if (filters.sort) params.sort = filters.sort
+        if (filters.featured) params.featured = 'true'
+        if (filters.trending) params.trending = 'true'
+        
+        await fetchProducts(params)
+      } catch (err) {
+        console.error('Error fetching products:', err)
+      }
     }
-  }
+
+    fetchProductsWithFilters()
+  }, [filters, fetchProducts])
 
   const handleFilterChange = (key, value) => {
     setFilters(prev => ({

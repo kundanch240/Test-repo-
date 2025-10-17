@@ -11,7 +11,8 @@ import {
   FiUser,
   FiHeart,
   FiLogOut,
-  FiChevronDown
+  FiChevronDown,
+  FiSettings
 } from 'react-icons/fi'
 import { useCart } from '@/context/CartContext'
 import { useAuth } from '@/context/AuthContext'
@@ -209,6 +210,16 @@ export default function Navbar() {
                     >
                       My Orders
                     </Link>
+                    {user.role === 'admin' && (
+                      <Link
+                        href="/admin"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        onClick={() => setShowUserMenu(false)}
+                      >
+                        <FiSettings className="inline w-4 h-4 mr-2" />
+                        Admin Panel
+                      </Link>
+                    )}
                     <button
                       onClick={handleLogout}
                       className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -337,6 +348,16 @@ export default function Navbar() {
                     <FiUser className="w-5 h-5 mr-3" />
                     My Orders
                   </Link>
+                  {user.role === 'admin' && (
+                    <Link
+                      href="/admin"
+                      className="flex items-center py-2 text-gray-700 hover:text-trendvibe-orange transition-colors duration-300"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <FiSettings className="w-5 h-5 mr-3" />
+                      Admin Panel
+                    </Link>
+                  )}
                   <button
                     onClick={() => {
                       handleLogout()
